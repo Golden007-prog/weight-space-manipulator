@@ -1,0 +1,45 @@
+name: Challenge idea
+description: Propose a new WSP Bench challenge (a task an agent solves by reading or editing weights).
+title: "[challenge idea] "
+labels: ["challenge idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Good challenges are auto-scored, need weight-space reasoning (not just more training), run on a laptop CPU
+        in under two minutes, and have a fresh random instance for every seed. Rough ideas are welcome too.
+  - type: textarea
+    id: task
+    attributes:
+      label: The task
+      description: What does the agent get, what must it do, and what does it submit?
+      placeholder: "The agent gets a 2-layer transformer that ... It must ... It submits ..."
+    validations:
+      required: true
+  - type: textarea
+    id: skill
+    attributes:
+      label: What it tests
+      description: Which weight-space skill does it need that the current nine challenges don't?
+    validations:
+      required: true
+  - type: textarea
+    id: scoring
+    attributes:
+      label: Scoring
+      description: How is a submission scored from 0 to 1? What scores ~0 (doing nothing) and ~1 (the reference fix)?
+  - type: dropdown
+    id: access
+    attributes:
+      label: Access level
+      options:
+        - weights_only
+        - weights+activations
+        - weights+activations+outputs
+        - not sure
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Contributing
+      options:
+        - label: I'd like to build it (the authoring kit lands in December)

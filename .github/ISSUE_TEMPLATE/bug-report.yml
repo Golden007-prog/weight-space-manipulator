@@ -1,0 +1,32 @@
+name: Bug report
+description: Something doesn't work as documented.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you run, what did you expect, and what happened instead?
+      placeholder: |
+        I ran `wsp arena record latest --size portrait` and expected an MP4, but got…
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output or error
+      description: Paste the full terminal output, including the traceback. It's formatted as code automatically.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The output of `python -c "import wsp_toolkit; print(wsp_toolkit.__version__)"`
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      description: OS, Python version, and how you installed (pip, uv, from source)
+      placeholder: macOS 15 (Apple M5), Python 3.12, uv tool install

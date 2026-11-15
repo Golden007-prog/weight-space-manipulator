@@ -16,12 +16,12 @@ by editing 0.016% of its weights. This toolkit turns that sandbox into something
   tasks), an **API runner** (`wsp bench run`) for comparing models such as Claude Fable 5.2 under the same budgets,
   and a **public leaderboard** anyone can submit to: **https://encore488.github.io/weight-space-manipulator/**
 - **The Arena**: an animated, sci-fi replay of every run (live while the agent works), exportable as an MP4 for
-  social posts: [`docs/arena.md`](docs/arena.md).
+  social posts: [`docs/arena.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/arena.md).
 - Plus a 392-network **zoo** with planted flaws, a **feature index** (sparse autoencoders) and **fine-tune audits**.
 
 Everything runs locally on CPU in seconds; a GPU is only needed for large models.
 
-![The web UI](docs/img/home.png)
+![The web UI](https://raw.githubusercontent.com/encore488/weight-space-manipulator/main/docs/img/home.png)
 
 ## Try it in five minutes
 
@@ -80,7 +80,7 @@ Claude model ID with `--model`.
 
 ## The Arena
 
-![The arena replaying a Claude Code session on fix-the-copier](docs/img/arena.gif)
+![The arena replaying a Claude Code session on fix-the-copier](https://raw.githubusercontent.com/encore488/weight-space-manipulator/main/docs/img/arena.gif)
 
 Every challenge run can be watched as it happens (`wsp ui` → **Arena**), replayed, or rendered as a video:
 
@@ -91,11 +91,11 @@ wsp arena record latest --size portrait      # 1080x1350 MP4; also landscape, sq
 
 Damaged heads glow red, and patched ones turn green once an edit fixes them. That ground truth is visible to viewers only, never to the
 agent. Replays of the baseline on all nine challenges are on the
-[website](https://encore488.github.io/weight-space-manipulator/arena.html). Details: [`docs/arena.md`](docs/arena.md).
+[website](https://encore488.github.io/weight-space-manipulator/arena.html). Details: [`docs/arena.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/arena.md).
 
 ## Challenges and the public leaderboard
 
-![Challenges](docs/img/challenges.png)
+![Challenges](https://raw.githubusercontent.com/encore488/weight-space-manipulator/main/docs/img/challenges.png)
 
 | Challenge | Kind | Access | Budget | Scripted baseline |
 |---|---|---|---|---|
@@ -120,7 +120,7 @@ wsp leaderboard export --model claude-fable-5-2 --by your-handle
 Paste the file into the [submission form](https://github.com/encore488/weight-space-manipulator/issues/new?template=leaderboard-submission.yml).
 A bot re-scores every run from its seed, answer and edits before it goes on the
 [leaderboard](https://encore488.github.io/weight-space-manipulator/leaderboard.html). Details:
-[`docs/challenges.md`](docs/challenges.md), [`docs/leaderboard.md`](docs/leaderboard.md).
+[`docs/challenges.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/challenges.md), [`docs/leaderboard.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/leaderboard.md).
 
 ## Using it on your own models
 
@@ -144,29 +144,37 @@ can only ask for less. Every tool call is logged append-only and visible in the 
 
 ## Status, honestly
 
-This is v0.2 of a personal research project. Expect rough edges:
+This is v0.3 of a personal research project. Expect rough edges:
 
 - The challenges and zoo use **small networks** (up to ~40K parameters), so you can see everything on CPU. The big-model
   path (Hugging Face, e.g. Qwen3.5-0.8B) works: a first 5-problem MATH-500 run on Kaggle T4s compared the paper's
   edited Qwen3.5-0.8B with the base model. The edited model hit the 32k-token limit on 0/5 problems (base: 3/5) and
   solved 3/5 (base: 1/5). That's the same direction as the paper, but far too few problems to confirm it:
-  [`docs/reports/m3_qwen_demo.md`](docs/reports/m3_qwen_demo.md).
+  [`docs/reports/m3_qwen_demo.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/reports/m3_qwen_demo.md).
 - Feature labels come from a simple rule-based labeler with measured fidelity, not an LLM.
 - Runs from MCP clients with shell access are *self-reported*: such an agent could read answer files on disk. Use
   `wsp agent run` for comparable numbers.
-- Design decisions and their rationale: [`DECISIONS.md`](DECISIONS.md). Acceptance results:
-  [`docs/reports/milestones.md`](docs/reports/milestones.md).
+- Design decisions and their rationale: [`DECISIONS.md`](https://github.com/encore488/weight-space-manipulator/blob/main/DECISIONS.md). Acceptance results:
+  [`docs/reports/milestones.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/reports/milestones.md).
 
 ## Docs
 
-- [`docs/agents.md`](docs/agents.md): connecting Claude Code, Claude Desktop, other MCP clients, the API runner
-- [`docs/challenges.md`](docs/challenges.md): the challenges, scoring and fair play
-- [`docs/arena.md`](docs/arena.md): live view, replays and video export
-- [`docs/leaderboard.md`](docs/leaderboard.md): submitting results, verification
-- [`docs/tools/`](docs/tools/README.md): every tool, with a real example call and output
-- [`docs/configuration.md`](docs/configuration.md), [`docs/design/patch_semantics.md`](docs/design/patch_semantics.md)
+- [`docs/agents.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/agents.md): connecting Claude Code, Claude Desktop, other MCP clients, the API runner
+- [`docs/challenges.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/challenges.md): the challenges, scoring and fair play
+- [`docs/arena.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/arena.md): live view, replays and video export
+- [`docs/leaderboard.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/leaderboard.md): submitting results, verification
+- [`docs/tools/`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/tools/README.md): every tool, with a real example call and output
+- [`docs/configuration.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/configuration.md), [`docs/design/patch_semantics.md`](https://github.com/encore488/weight-space-manipulator/blob/main/docs/design/patch_semantics.md)
 
-## Development
+## Contributing
+
+WSP Bench is meant to be built by its community: new challenges, leaderboard runs from more models, and
+improvements to the Arena and the toolkit.
+
+- Start here: [CONTRIBUTING.md](https://github.com/encore488/weight-space-manipulator/blob/main/CONTRIBUTING.md) and the
+  [good first issues](https://github.com/encore488/weight-space-manipulator/labels/good%20first%20issue).
+- What's coming: [ROADMAP.md](https://github.com/encore488/weight-space-manipulator/blob/main/ROADMAP.md). What shipped:
+  [CHANGELOG.md](https://github.com/encore488/weight-space-manipulator/blob/main/CHANGELOG.md).
 
 ```bash
 git clone https://github.com/encore488/weight-space-manipulator && cd weight-space-manipulator

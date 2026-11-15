@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Questions and show-and-tell
+    url: https://github.com/encore488/weight-space-manipulator/discussions
+    about: Ask how something works, or share a run, a replay or an idea in Discussions.
+  - name: The leaderboard and Arena
+    url: https://encore488.github.io/weight-space-manipulator/
+    about: Scores, replays and how to submit.

@@ -1,0 +1,52 @@
+name: release
+# Publishes wsp-toolkit to PyPI when a GitHub release is published. Uses trusted publishing (OIDC): no API token
+# is stored anywhere. One-time setup on pypi.org: Account settings -> Publishing -> Add a new pending publisher:
+#   PyPI project name: wsp-toolkit · Owner: encore488 · Repository: weight-space-manipulator
+#   Workflow name: release.yml · Environment name: pypi
+# Then: GitHub -> Releases -> Draft a new release -> tag v<version in wsp_toolkit/__init__.py> -> Publish.
+# "Run workflow" (manual) builds and smoke-tests the package without publishing.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Release tag matches the package version
+        if: github.event_name == 'release'
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          v=$(python -c "import re, pathlib; print(re.search(r'__version__ = \"(.+?)\"', pathlib.Path('wsp_toolkit/__init__.py').read_text()).group(1))")
+          if [ "v$v" != "$TAG" ]; then echo "release tag $TAG does not match package version v$v"; exit 1; fi
+      - run: pip install build twine
+      - run: python -m build
+      - run: twine check dist/*
+      - name: Smoke-test the wheel
+        run: |
+          pip install --index-url https://download.pytorch.org/whl/cpu torch
+          pip install dist/*.whl
+          cd "$RUNNER_TEMP"
+          wsp challenge list > /dev/null
+          python -c "import wsp_toolkit; print('wsp-toolkit', wsp_toolkit.__version__)"
+      - uses: actions/upload-artifact@v4
+        with: {name: dist, path: dist/}
+  publish:
+    needs: build
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/wsp-toolkit
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {name: dist, path: dist/}
+      - uses: pypa/gh-action-pypi-publish@release/v1
