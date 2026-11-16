@@ -1,6 +1,13 @@
+import importlib.util
 import json
+from pathlib import Path
 
-from scripts.gen_tool_docs import ExampleFormatter
+script = Path(__file__).resolve().parents[1] / "scripts" / "gen_tool_docs.py"
+spec = importlib.util.spec_from_file_location("gen_tool_docs", script)
+assert spec is not None and spec.loader is not None
+gen_tool_docs = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(gen_tool_docs)
+ExampleFormatter = gen_tool_docs.ExampleFormatter
 
 
 def test_example_ids_stay_linked_across_calls_and_results():
